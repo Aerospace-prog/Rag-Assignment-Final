@@ -103,47 +103,78 @@ const ChatArea = ({ messages, onSendMessage, user, onDocumentAdded }) => {
         </div>
 
         <div className="messages-area" role="log" aria-live="polite" aria-atomic="false" aria-relevant="additions" aria-labelledby="chat-heading">
-          {messages.map((msg) => (
-            <div key={msg.id} className={`message ${msg.sender}`} role="article" aria-label={`${msg.sender === 'user' ? 'User' : 'AI'} message`}>
-              <div className={`avatar ${msg.sender}`} aria-hidden="true">
-                {msg.sender === 'user' ? (
-                  <img src={user?.photoURL || ''} alt="" style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
-                ) : (
-                  <Sparkles size={20} color="#3b82f6" />
-                )}
-              </div>
-              <div className="message-content">
-                {msg.sender === 'ai' && !msg.isLoading ? (
-                  <div className="markdown-prose">
-                    <ReactMarkdown>{msg.text}</ReactMarkdown>
+          {messages.length === 1 && messages[0].id === 'welcome' ? (
+            <div className="welcome-screen">
+              <div className="welcome-icon">✨</div>
+              <h2 className="welcome-title">Welcome to AI Research Assistant</h2>
+              <p className="welcome-subtitle">Upload documents or paste URLs to get started. I'll help you explore and understand your knowledge base.</p>
+              <div className="suggestion-cards">
+                <div className="suggestion-card" onClick={() => document.querySelector('.chat-input')?.focus()}>
+                  <div className="suggestion-icon">📄</div>
+                  <div className="suggestion-text">
+                    <strong>Upload Documents</strong>
+                    <span>Add PDFs or text files to your knowledge base</span>
                   </div>
-                ) : msg.sender === 'user' ? (
-                  <div className="user-message-content" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-                    {msg.attachment && (
-                      <div className="message-attachment-badge" style={{ 
-                        display: 'inline-flex', 
-                        alignItems: 'center', 
-                        gap: '6px', 
-                        backgroundColor: 'rgba(255, 255, 255, 0.15)', 
-                        padding: '6px 10px', 
-                        borderRadius: '6px', 
-                        fontSize: '13px',
-                        fontWeight: '500',
-                        width: 'fit-content'
-                      }}>
-                        {msg.attachment.type === 'link' ? <Globe size={14} aria-hidden="true" /> : <FileText size={14} aria-hidden="true" />}
-                        <span>{msg.attachment.name}</span>
-                      </div>
-                    )}
-                    {msg.text && <div>{msg.text}</div>}
+                </div>
+                <div className="suggestion-card" onClick={() => document.querySelector('.chat-input')?.focus()}>
+                  <div className="suggestion-icon">🔗</div>
+                  <div className="suggestion-text">
+                    <strong>Scrape Web Pages</strong>
+                    <span>Extract content from any URL</span>
                   </div>
-                ) : (
-                  msg.text
-                )}
-                {msg.isLoading && <span className="typing-indicator" role="status" aria-label="AI is typing"><span>.</span><span>.</span><span>.</span></span>}
+                </div>
+                <div className="suggestion-card" onClick={() => document.querySelector('.chat-input')?.focus()}>
+                  <div className="suggestion-icon">💬</div>
+                  <div className="suggestion-text">
+                    <strong>Ask Questions</strong>
+                    <span>Get AI-powered insights from your documents</span>
+                  </div>
+                </div>
               </div>
             </div>
-          ))}
+          ) : (
+            messages.map((msg) => (
+              <div key={msg.id} className={`message ${msg.sender}`} role="article" aria-label={`${msg.sender === 'user' ? 'User' : 'AI'} message`}>
+                <div className={`avatar ${msg.sender}`} aria-hidden="true">
+                  {msg.sender === 'user' ? (
+                    <img src={user?.photoURL || ''} alt="" style={{ width: '100%', height: '100%', borderRadius: '50%' }} />
+                  ) : (
+                    <Sparkles size={20} color="#3b82f6" />
+                  )}
+                </div>
+                <div className="message-content">
+                  {msg.sender === 'ai' && !msg.isLoading ? (
+                    <div className="markdown-prose">
+                      <ReactMarkdown>{msg.text}</ReactMarkdown>
+                    </div>
+                  ) : msg.sender === 'user' ? (
+                    <div className="user-message-content" style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      {msg.attachment && (
+                        <div className="message-attachment-badge" style={{ 
+                          display: 'inline-flex', 
+                          alignItems: 'center', 
+                          gap: '6px', 
+                          backgroundColor: 'rgba(255, 255, 255, 0.15)', 
+                          padding: '6px 10px', 
+                          borderRadius: '6px', 
+                          fontSize: '13px',
+                          fontWeight: '500',
+                          width: 'fit-content'
+                        }}>
+                          {msg.attachment.type === 'link' ? <Globe size={14} aria-hidden="true" /> : <FileText size={14} aria-hidden="true" />}
+                          <span>{msg.attachment.name}</span>
+                        </div>
+                      )}
+                      {msg.text && <div>{msg.text}</div>}
+                    </div>
+                  ) : (
+                    msg.text
+                  )}
+                  {msg.isLoading && <span className="typing-indicator" role="status" aria-label="AI is typing"><span>.</span><span>.</span><span>.</span></span>}
+                </div>
+              </div>
+            ))
+          )}
           <div ref={endOfMessagesRef} />
         </div>
 

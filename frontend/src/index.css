@@ -33,60 +33,61 @@
   --tracking-wide: 0.025em;
   --tracking-wider: 0.05em;
 
-  /* Color Palette System - Modern AI Chat Theme */
+  /* Color Palette System - Professional AI Chat Theme */
   
-  /* Base Colors - Dark Mode with warmer tones */
-  --bg-primary: #0d0d0d;
-  --bg-secondary: #171717;
-  --bg-tertiary: #1f1f1f;
+  /* Base Colors - Clean Dark Mode */
+  --bg-primary: #0f0f0f;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #242424;
   
   /* Surface Colors */
-  --surface-base: rgba(38, 38, 38, 0.5);
-  --surface-hover: rgba(45, 45, 45, 0.7);
-  --surface-active: rgba(52, 52, 52, 0.85);
+  --surface-base: rgba(30, 30, 30, 0.6);
+  --surface-hover: rgba(40, 40, 40, 0.8);
+  --surface-active: rgba(50, 50, 50, 0.9);
   
   /* Border Colors */
   --border-subtle: rgba(255, 255, 255, 0.06);
-  --border-default: rgba(255, 255, 255, 0.1);
-  --border-emphasis: rgba(255, 255, 255, 0.15);
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-emphasis: rgba(255, 255, 255, 0.12);
   
   /* Text Colors */
-  --text-primary: #ececec;      /* Main content */
-  --text-secondary: #d1d1d1;    /* Secondary content */
-  --text-muted: #a0a0a0;        /* Muted/disabled */
-  --text-inverse: #0d0d0d;      /* On light backgrounds */
+  --text-primary: #ececec;
+  --text-secondary: #b4b4b4;
+  --text-muted: #8e8e8e;
+  --text-inverse: #0f0f0f;
   
-  /* Accent Colors - Modern Teal/Cyan Theme */
-  --accent-primary: #10a37f;    /* Primary teal */
-  --accent-secondary: #1a7f64;  /* Darker teal */
-  --accent-tertiary: #0d8a6f;   /* Medium teal */
+  /* Accent Colors - Professional Teal */
+  --accent-primary: #19c37d;
+  --accent-secondary: #15a869;
+  --accent-tertiary: #128a57;
   
   /* Semantic Colors */
-  --success: #10b981;           /* Green */
-  --warning: #f59e0b;           /* Amber */
-  --error: #ef4444;             /* Red */
-  --info: #10a37f;              /* Teal */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --error: #ef4444;
+  --info: #19c37d;
   
   /* Message Bubbles */
-  --msg-user-bg: rgba(16, 163, 127, 0.1);
+  --msg-user-bg: rgba(25, 195, 125, 0.08);
   --msg-ai-bg: transparent;
   
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #10a37f, #1a7f64);
-  --gradient-bg: linear-gradient(180deg, #0d0d0d 0%, #171717 100%);
+  --gradient-primary: linear-gradient(135deg, #19c37d, #15a869);
+  --gradient-bg: linear-gradient(180deg, #0f0f0f 0%, #1a1a1a 100%);
   
   /* Glow Effects */
-  --glow-primary: rgba(16, 163, 127, 0.3);
-  --glow-secondary: rgba(26, 127, 100, 0.25);
+  --glow-primary: rgba(25, 195, 125, 0.25);
+  --glow-secondary: rgba(21, 168, 105, 0.2);
   
   /* Component-specific colors */
-  --btn-accent-bg: rgba(16, 163, 127, 0.1);
-  --btn-accent-bg-hover: rgba(16, 163, 127, 0.15);
-  --btn-accent-border: rgba(16, 163, 127, 0.3);
+  --btn-accent-bg: rgba(25, 195, 125, 0.08);
+  --btn-accent-bg-hover: rgba(25, 195, 125, 0.12);
+  --btn-accent-border: rgba(25, 195, 125, 0.25);
   --btn-danger-bg-hover: rgba(239, 68, 68, 0.1);
   --btn-danger-bg-active: rgba(239, 68, 68, 0.12);
   --badge-warning-bg: rgba(234, 179, 8, 0.1);
-  --shadow-default: rgba(0, 0, 0, 0.3);
+  --shadow-default: rgba(0, 0, 0, 0.4);
+  --shadow-elevated: rgba(0, 0, 0, 0.6);
   
   /* Legacy aliases for backward compatibility */
   --bg-color: var(--bg-primary);
@@ -141,10 +142,10 @@ body {
 /* Glassmorphism Utilities */
 .glass-panel {
   background: var(--surface-base);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(16px) saturate(180%);
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   border: 1px solid var(--border-subtle);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Custom Scrollbar */
