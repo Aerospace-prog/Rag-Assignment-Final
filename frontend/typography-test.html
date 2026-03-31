@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Typography System Test</title>
+  <link rel="stylesheet" href="src/index.css">
+  <link rel="stylesheet" href="src/App.css">
+  <style>
+    .test-container {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .test-section {
+      margin-bottom: 3rem;
+      padding: 1.5rem;
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: 12px;
+    }
+    .test-section h2 {
+      font-family: var(--font-primary);
+      font-size: var(--text-2xl);
+      font-weight: var(--font-bold);
+      line-height: var(--leading-tight);
+      margin-bottom: 1rem;
+      color: var(--accent-primary);
+    }
+    .font-sample {
+      margin: 1rem 0;
+      padding: 0.75rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+    }
+    .viewport-info {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.75rem 1rem;
+      background: var(--accent-primary);
+      color: white;
+      border-radius: 8px;
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div class="viewport-info" id="viewportInfo">
+    Viewport: <span id="width">0</span>px × <span id="height">0</span>px
+  </div>
+  
+  <div class="test-container">
+    <div class="test-section">
+      <h2>Typography System Test</h2>
+      <p style="font-family: var(--font-primary); font-size: var(--text-base); line-height: var(--leading-normal);">
+        This page tests the typography system across different viewport sizes (320px to 2560px).
+        Resize your browser window to see responsive typography adjustments.
+      </p>
+    </div>
+
+    <div class="test-section">
+      <h2>Font Sizes</h2>
+      <div class="font-sample" style="font-size: var(--text-xs);">
+        <strong>text-xs (0.75rem / 12px):</strong> Caption and label text
+      </div>
+      <div class="font-sample" style="font-size: var(--text-sm);">
+        <strong>text-sm (0.875rem / 14px):</strong> Secondary text and small content
+      </div>
+      <div class="font-sample" style="font-size: var(--text-base);">
+        <strong>text-base (1rem / 16px):</strong> Body text and main content
+      </div>
+      <div class="font-sample" style="font-size: var(--text-lg);">
+        <strong>text-lg (1.125rem / 18px):</strong> Emphasized text
+      </div>
+      <div class="font-sample" style="font-size: var(--text-xl);">
+        <strong>text-xl (1.25rem / 20px):</strong> Small headings
+      </div>
+      <div class="font-sample" style="font-size: var(--text-2xl);">
+        <strong>text-2xl (1.5rem / 24px):</strong> Section headings
+      </div>
+      <div class="font-sample" style="font-size: var(--text-3xl);">
+        <strong>text-3xl (1.875rem / 30px):</strong> Page headings
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>Font Weights</h2>
+      <div class="font-sample" style="font-weight: var(--font-light);">
+        <strong>font-light (300):</strong> Light weight text for subtle emphasis
+      </div>
+      <div class="font-sample" style="font-weight: var(--font-regular);">
+        <strong>font-regular (400):</strong> Regular weight for body text
+      </div>
+      <div class="font-sample" style="font-weight: var(--font-medium);">
+        <strong>font-medium (500):</strong> Medium weight for buttons and labels
+      </div>
+      <div class="font-sample" style="font-weight: var(--font-semibold);">
+        <strong>font-semibold (600):</strong> Semibold for subheadings
+      </div>
+      <div class="font-sample" style="font-weight: var(--font-bold);">
+        <strong>font-bold (700):</strong> Bold for headings and emphasis
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>Line Heights</h2>
+      <div class="font-sample" style="line-height: var(--leading-tight);">
+        <strong>leading-tight (1.25):</strong> Tight line height for headings and compact text.
+        This is useful when you want to save vertical space while maintaining readability.
+      </div>
+      <div class="font-sample" style="line-height: var(--leading-normal);">
+        <strong>leading-normal (1.5):</strong> Normal line height for body text and general content.
+        This provides comfortable reading experience for most text content.
+      </div>
+      <div class="font-sample" style="line-height: var(--leading-relaxed);">
+        <strong>leading-relaxed (1.75):</strong> Relaxed line height for improved readability.
+        This is ideal for longer paragraphs and content that needs extra breathing room.
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>Letter Spacing</h2>
+      <div class="font-sample" style="letter-spacing: var(--tracking-tight);">
+        <strong>tracking-tight (-0.025em):</strong> Tight letter spacing for large headings
+      </div>
+      <div class="font-sample" style="letter-spacing: var(--tracking-normal);">
+        <strong>tracking-normal (0):</strong> Normal letter spacing for body text
+      </div>
+      <div class="font-sample" style="letter-spacing: var(--tracking-wide); text-transform: uppercase;">
+        <strong>tracking-wide (0.025em):</strong> Wide spacing for uppercase labels
+      </div>
+      <div class="font-sample" style="letter-spacing: var(--tracking-wider); text-transform: uppercase;">
+        <strong>tracking-wider (0.05em):</strong> Wider spacing for section headers
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>Font Families</h2>
+      <div class="font-sample" style="font-family: var(--font-primary);">
+        <strong>font-primary (Inter):</strong> The quick brown fox jumps over the lazy dog. 0123456789
+      </div>
+      <div class="font-sample" style="font-family: var(--font-mono);">
+        <strong>font-mono (Fira Code):</strong> const greeting = "Hello, World!"; // Code sample
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>Component Examples</h2>
+      <button class="new-chat-btn">New Chat Button</button>
+      <div class="history-item" style="margin-top: 1rem;">History Item Text</div>
+      <div class="message-content" style="margin-top: 1rem; background: var(--ai-msg-bg); padding: 1rem; border-radius: 12px;">
+        This is a sample message content with proper typography applied. It uses the base font size,
+        relaxed line height, and normal letter spacing for optimal readability.
+      </div>
+    </div>
+
+    <div class="test-section">
+      <h2>Responsive Breakpoints</h2>
+      <ul style="font-family: var(--font-primary); font-size: var(--text-base); line-height: var(--leading-relaxed);">
+        <li><strong>Mobile (≤768px):</strong> Font sizes slightly reduced for better mobile readability</li>
+        <li><strong>Desktop (769px - 1919px):</strong> Standard font sizes as defined</li>
+        <li><strong>Large Screens (≥1920px):</strong> Font sizes slightly increased for large displays</li>
+      </ul>
+      <p style="font-family: var(--font-primary); font-size: var(--text-sm); line-height: var(--leading-normal); color: var(--text-muted); margin-top: 1rem;">
+        Resize your browser window to test responsive typography at different viewport widths.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function updateViewportInfo() {
+      document.getElementById('width').textContent = window.innerWidth;
+      document.getElementById('height').textContent = window.innerHeight;
+    }
+    
+    updateViewportInfo();
+    window.addEventListener('resize', updateViewportInfo);
+  </script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+:root {
+  /* Typography System */
+  /* Font Families */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'Fira Code', 'Courier New', monospace;
+  
+  /* Font Weights */
+  --font-light: 300;
+  --font-regular: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+  
+  /* Font Sizes */
+  --text-xs: 0.75rem;      /* 12px - captions, labels */
+  --text-sm: 0.875rem;     /* 14px - secondary text */
+  --text-base: 1rem;       /* 16px - body text */
+  --text-lg: 1.125rem;     /* 18px - emphasized text */
+  --text-xl: 1.25rem;      /* 20px - small headings */
+  --text-2xl: 1.5rem;      /* 24px - section headings */
+  --text-3xl: 1.875rem;    /* 30px - page headings */
+  
+  /* Line Heights */
+  --leading-tight: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+  
+  /* Letter Spacing */
+  --tracking-tight: -0.025em;
+  --tracking-normal: 0;
+  --tracking-wide: 0.025em;
+  --tracking-wider: 0.05em;
+
+  /* Color Palette System - Financial/Investment Theme */
+  
+  /* Base Colors - Dark Mode */
+  --bg-primary: #0b0d12;
+  --bg-secondary: #101423;
+  --bg-tertiary: #1a1d2e;
+  
+  /* Surface Colors */
+  --surface-base: rgba(31, 33, 39, 0.72);
+  --surface-hover: rgba(31, 33, 39, 0.85);
+  --surface-active: rgba(31, 33, 39, 0.95);
+  
+  /* Border Colors */
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-default: rgba(255, 255, 255, 0.08);
+  --border-emphasis: rgba(255, 255, 255, 0.12);
+  
+  /* Text Colors */
+  --text-primary: #e5e7eb;      /* Main content */
+  --text-secondary: #d1d5db;    /* Secondary content */
+  --text-muted: #9ca3af;        /* Muted/disabled */
+  --text-inverse: #1f2937;      /* On light backgrounds */
+  
+  /* Accent Colors - Financial Theme */
+  --accent-primary: #3b82f6;    /* Primary blue */
+  --accent-secondary: #6366f1;  /* Indigo */
+  --accent-tertiary: #8b5cf6;   /* Purple */
+  
+  /* Semantic Colors */
+  --success: #10b981;           /* Green */
+  --warning: #f59e0b;           /* Amber */
+  --error: #ef4444;             /* Red */
+  --info: #3b82f6;              /* Blue */
+  
+  /* Message Bubbles */
+  --msg-user-bg: rgba(59, 130, 246, 0.18);
+  --msg-ai-bg: rgba(255, 255, 255, 0.06);
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #3b82f6, #6366f1);
+  --gradient-bg: linear-gradient(180deg, #0b0d12 0%, #101423 100%);
+  
+  /* Glow Effects */
+  --glow-primary: rgba(59, 130, 246, 0.42);
+  --glow-secondary: rgba(99, 102, 241, 0.35);
+  
+  /* Component-specific colors */
+  --btn-accent-bg: rgba(59, 130, 246, 0.12);
+  --btn-accent-bg-hover: rgba(59, 130, 246, 0.18);
+  --btn-accent-border: rgba(59, 130, 246, 0.28);
+  --btn-danger-bg-hover: rgba(239, 68, 68, 0.1);
+  --btn-danger-bg-active: rgba(239, 68, 68, 0.12);
+  --badge-warning-bg: rgba(234, 179, 8, 0.1);
+  --shadow-default: rgba(0, 0, 0, 0.2);
+  
+  /* Legacy aliases for backward compatibility */
+  --bg-color: var(--bg-primary);
+  --bg-gradient: var(--gradient-bg);
+  --panel-bg: var(--surface-base);
+  --panel-border: var(--border-default);
+  --text-main: var(--text-primary);
+  --accent-gradient: var(--gradient-primary);
+  --accent-glow: var(--glow-primary);
+  --user-msg-bg: var(--msg-user-bg);
+  --ai-msg-bg: var(--msg-ai-bg);
+
+  /* Animation System */
+  /* Timing Functions */
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  
+  /* Durations */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 400ms;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-weight: var(--font-regular);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  letter-spacing: var(--tracking-normal);
+  background: var(--bg-primary);
+  background-image: var(--gradient-bg);
+  color: var(--text-primary);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  background: var(--surface-base);
+  /* ChatGPT feels mostly flat; keep blur minimal */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--border-default);
+  box-shadow: none;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Animations */
+@keyframes slideUpFade {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes typing {
+  0%, 100% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 10px var(--glow-primary); }
+  50% { box-shadow: 0 0 20px var(--glow-primary), 0 0 40px var(--glow-secondary); }
+  100% { box-shadow: 0 0 10px var(--glow-primary); }
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

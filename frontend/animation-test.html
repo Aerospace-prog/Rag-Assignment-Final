@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animation Engine Test</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+    :root {
+      /* Animation System */
+      --ease-in: cubic-bezier(0.4, 0, 1, 1);
+      --ease-out: cubic-bezier(0, 0, 0.2, 1);
+      --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+      --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+      
+      --duration-fast: 150ms;
+      --duration-normal: 250ms;
+      --duration-slow: 400ms;
+
+      /* Colors for testing */
+      --bg-primary: #0b0d12;
+      --text-primary: #e5e7eb;
+      --accent-primary: #3b82f6;
+      --surface-base: rgba(31, 33, 39, 0.72);
+      --border-default: rgba(255, 255, 255, 0.08);
+      --glow-primary: rgba(59, 130, 246, 0.42);
+    }
+
+    /* Keyframe Animations */
+    @keyframes slideUpFade {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes scaleIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.5;
+      }
+    }
+
+    @keyframes typing {
+      0%, 100% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* Accessibility: Respect prefers-reduced-motion */
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    h1 {
+      margin-bottom: 2rem;
+      color: var(--accent-primary);
+    }
+
+    .test-section {
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: var(--surface-base);
+      border: 1px solid var(--border-default);
+      border-radius: 8px;
+    }
+
+    .test-section h2 {
+      margin-bottom: 1rem;
+      font-size: 1.25rem;
+    }
+
+    .test-box {
+      display: inline-block;
+      padding: 1rem 2rem;
+      margin: 0.5rem;
+      background: var(--accent-primary);
+      color: white;
+      border-radius: 8px;
+      font-weight: 500;
+    }
+
+    /* Animation Classes */
+    .anim-slideUpFade {
+      animation: slideUpFade var(--duration-slow) var(--ease-out);
+    }
+
+    .anim-scaleIn {
+      animation: scaleIn var(--duration-normal) var(--ease-out);
+    }
+
+    .anim-spin {
+      animation: spin 2s linear infinite;
+    }
+
+    .anim-pulse {
+      animation: pulse 2s var(--ease-in-out) infinite;
+    }
+
+    .anim-typing {
+      animation: typing 1.4s var(--ease-in-out) infinite;
+    }
+
+    .typing-dots {
+      display: inline-flex;
+      gap: 0.25rem;
+    }
+
+    .typing-dots span {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .typing-dots span:nth-child(1) {
+      animation: typing 1.4s var(--ease-in-out) infinite;
+    }
+
+    .typing-dots span:nth-child(2) {
+      animation: typing 1.4s var(--ease-in-out) 0.2s infinite;
+    }
+
+    .typing-dots span:nth-child(3) {
+      animation: typing 1.4s var(--ease-in-out) 0.4s infinite;
+    }
+
+    .trigger-btn {
+      padding: 0.75rem 1.5rem;
+      background: var(--accent-primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: transform var(--duration-fast) var(--ease-out);
+    }
+
+    .trigger-btn:hover {
+      transform: scale(1.05);
+    }
+
+    .trigger-btn:active {
+      transform: scale(0.98);
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(59, 130, 246, 0.2);
+      border-top-color: var(--accent-primary);
+      border-radius: 50%;
+    }
+
+    .info-box {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(59, 130, 246, 0.1);
+      border-left: 3px solid var(--accent-primary);
+      border-radius: 4px;
+      font-size: 0.875rem;
+    }
+
+    .timing-demo {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .timing-box {
+      padding: 1rem;
+      background: var(--accent-primary);
+      color: white;
+      border-radius: 6px;
+      min-width: 120px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Animation Engine Test Suite</h1>
+
+  <div class="test-section">
+    <h2>1. slideUpFade Animation</h2>
+    <p>Tests fade-in with upward translation (used for messages)</p>
+    <div id="slideUpFadeBox" class="test-box">Slide Up & Fade</div>
+    <button class="trigger-btn" onclick="triggerAnimation('slideUpFadeBox', 'anim-slideUpFade')">Trigger</button>
+    <div class="info-box">
+      <strong>Expected:</strong> Box fades in while moving up 15px over 400ms with ease-out timing
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>2. scaleIn Animation</h2>
+    <p>Tests fade-in with scale effect (used for modals)</p>
+    <div id="scaleInBox" class="test-box">Scale In</div>
+    <button class="trigger-btn" onclick="triggerAnimation('scaleInBox', 'anim-scaleIn')">Trigger</button>
+    <div class="info-box">
+      <strong>Expected:</strong> Box fades in while scaling from 0.95 to 1.0 over 250ms with ease-out timing
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>3. spin Animation</h2>
+    <p>Tests continuous rotation (used for loading spinners)</p>
+    <div class="spinner anim-spin"></div>
+    <div class="info-box">
+      <strong>Expected:</strong> Spinner rotates continuously 360° with linear timing (infinite loop)
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>4. pulse Animation</h2>
+    <p>Tests opacity pulsing (used for loading states)</p>
+    <div id="pulseBox" class="test-box anim-pulse">Pulsing</div>
+    <div class="info-box">
+      <strong>Expected:</strong> Box opacity pulses between 1.0 and 0.5 continuously with ease-in-out timing
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>5. typing Animation</h2>
+    <p>Tests typing indicator dots (used for AI response loading)</p>
+    <div class="typing-dots">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="info-box">
+      <strong>Expected:</strong> Three dots animate sequentially with staggered delays (0s, 0.2s, 0.4s)
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>6. Timing Functions Test</h2>
+    <p>Tests different easing functions</p>
+    <div class="timing-demo">
+      <div class="timing-box" id="easeIn">ease-in</div>
+      <div class="timing-box" id="easeOut">ease-out</div>
+      <div class="timing-box" id="easeInOut">ease-in-out</div>
+      <div class="timing-box" id="easeBounce">ease-bounce</div>
+    </div>
+    <button class="trigger-btn" onclick="triggerTimingDemo()">Trigger All</button>
+    <div class="info-box">
+      <strong>Expected:</strong> Each box moves with different easing curves showing distinct acceleration patterns
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>7. Duration Variables Test</h2>
+    <p>Tests different animation durations</p>
+    <div class="timing-demo">
+      <div class="timing-box" id="durationFast">Fast (150ms)</div>
+      <div class="timing-box" id="durationNormal">Normal (250ms)</div>
+      <div class="timing-box" id="durationSlow">Slow (400ms)</div>
+    </div>
+    <button class="trigger-btn" onclick="triggerDurationDemo()">Trigger All</button>
+    <div class="info-box">
+      <strong>Expected:</strong> Boxes animate at different speeds: fast, normal, and slow
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>8. GPU-Accelerated Properties</h2>
+    <p>Verifies only transform and opacity are animated (performance requirement)</p>
+    <div class="info-box">
+      <strong>✓ All animations use only transform and opacity</strong><br>
+      • slideUpFade: opacity + translateY<br>
+      • scaleIn: opacity + scale<br>
+      • spin: rotate<br>
+      • pulse: opacity<br>
+      • typing: opacity<br>
+      <br>
+      These properties are GPU-accelerated for 60fps performance.
+    </div>
+  </div>
+
+  <div class="test-section">
+    <h2>9. Accessibility: prefers-reduced-motion</h2>
+    <p>Tests reduced motion support</p>
+    <div class="info-box">
+      <strong>To test:</strong><br>
+      1. Open System Preferences (Mac) or Settings (Windows)<br>
+      2. Enable "Reduce motion" or "Show animations in Windows"<br>
+      3. Reload this page<br>
+      4. All animations should be nearly instant (0.01ms duration)<br>
+      <br>
+      <strong>Current status:</strong> <span id="motionStatus"></span>
+    </div>
+  </div>
+
+  <script>
+    // Check prefers-reduced-motion status
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    document.getElementById('motionStatus').textContent = prefersReducedMotion 
+      ? '✓ Reduced motion is ENABLED' 
+      : '✗ Reduced motion is DISABLED (animations at full speed)';
+
+    function triggerAnimation(elementId, animationClass) {
+      const element = document.getElementById(elementId);
+      element.classList.remove(animationClass);
+      void element.offsetWidth; // Force reflow
+      element.classList.add(animationClass);
+    }
+
+    function triggerTimingDemo() {
+      const timings = [
+        { id: 'easeIn', timing: 'var(--ease-in)' },
+        { id: 'easeOut', timing: 'var(--ease-out)' },
+        { id: 'easeInOut', timing: 'var(--ease-in-out)' },
+        { id: 'easeBounce', timing: 'var(--ease-bounce)' }
+      ];
+
+      timings.forEach(({ id, timing }) => {
+        const element = document.getElementById(id);
+        element.style.transition = `transform 1s ${timing}`;
+        element.style.transform = 'translateX(0)';
+        
+        setTimeout(() => {
+          element.style.transform = 'translateX(200px)';
+        }, 50);
+
+        setTimeout(() => {
+          element.style.transform = 'translateX(0)';
+        }, 1500);
+      });
+    }
+
+    function triggerDurationDemo() {
+      const durations = [
+        { id: 'durationFast', duration: 'var(--duration-fast)' },
+        { id: 'durationNormal', duration: 'var(--duration-normal)' },
+        { id: 'durationSlow', duration: 'var(--duration-slow)' }
+      ];
+
+      durations.forEach(({ id, duration }) => {
+        const element = document.getElementById(id);
+        element.style.transition = `transform ${duration} var(--ease-out)`;
+        element.style.transform = 'translateX(0)';
+        
+        setTimeout(() => {
+          element.style.transform = 'translateX(200px)';
+        }, 50);
+
+        setTimeout(() => {
+          element.style.transform = 'translateX(0)';
+        }, 1000);
+      });
+    }
+
+    // Auto-trigger some animations on load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        triggerAnimation('slideUpFadeBox', 'anim-slideUpFade');
+      }, 500);
+      
+      setTimeout(() => {
+        triggerAnimation('scaleInBox', 'anim-scaleIn');
+      }, 1000);
+    });
+  </script>
+</body>
+</html>
