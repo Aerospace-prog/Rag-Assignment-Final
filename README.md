@@ -158,7 +158,7 @@ See [DEMO_GUIDE.md](DEMO_GUIDE.md) for detailed recording instructions.
 
 ### Frontend (Firebase Hosting)
 
-**Deployment URL**: https://abhishek-rag-2026.web.app
+**Deployment URL**: https://rag-assignment-b7cea.web.app
 
 **Deployment Steps:**
 ```bash
@@ -166,6 +166,8 @@ cd frontend
 npm run build
 firebase deploy --only hosting
 ```
+
+**Deployment Status**: ✅ Successfully deployed on March 31, 2026
 
 ## 🔑 Environment Variables
 
