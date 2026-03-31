@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, Sparkles, Paperclip, Loader2, FileText, Link as LinkIcon, X, Globe, Info } from 'lucide-react';
+import { Send, Sparkles, Paperclip, Loader2, FileText, Link as LinkIcon, X, Globe } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import { auth } from '../../config/firebase';
 import { API_BASE_URL } from '../../config/api';
@@ -11,7 +11,6 @@ const ChatArea = ({ messages, onSendMessage, user, onDocumentAdded }) => {
   const [urlInput, setUrlInput] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [uploadStatus, setUploadStatus] = useState('');
-  const [activeDebugId, setActiveDebugId] = useState(null);
 
   const endOfMessagesRef = useRef(null);
   const fileInputRef = useRef(null);
@@ -142,51 +141,6 @@ const ChatArea = ({ messages, onSendMessage, user, onDocumentAdded }) => {
                   msg.text
                 )}
                 {msg.isLoading && <span className="typing-indicator" role="status" aria-label="AI is typing"><span>.</span><span>.</span><span>.</span></span>}
-                
-                {/* Debug UI for Context Chunks */}
-                {msg.contextChunks && msg.contextChunks.length > 0 && (
-                  <div className="debug-container">
-                    <button 
-                      className="info-btn"
-                      onClick={() => setActiveDebugId(activeDebugId === msg.id ? null : msg.id)}
-                      title="View Retrieved Context"
-                      aria-label={`View ${msg.contextChunks.length} source${msg.contextChunks.length > 1 ? 's' : ''}`}
-                      aria-expanded={activeDebugId === msg.id}
-                      aria-controls={`context-panel-${msg.id}`}
-                    >
-                      <Info size={14} aria-hidden="true" />
-                      <span>Sources ({msg.contextChunks.length})</span>
-                    </button>
-                    
-                    {activeDebugId === msg.id && (
-                      <div 
-                        id={`context-panel-${msg.id}`}
-                        className="debug-panel glass-panel" 
-                        role="region" 
-                        aria-label="Retrieved context chunks"
-                      >
-                        <div className="debug-header">
-                          <h4>Retrieved Context Chunks</h4>
-                          <button onClick={() => setActiveDebugId(null)} aria-label="Close context chunks"><X size={14} aria-hidden="true" /></button>
-                        </div>
-                        <div className="chunks-list">
-                          {msg.contextChunks.map((chunk, idx) => (
-                            <div key={idx} className="chunk-card" role="article" aria-label={`Source ${idx + 1} from ${chunk.document_name}`}>
-                              <div className="chunk-meta">
-                                <span className="chunk-source">
-                                  {chunk.doc_type === 'web' ? <Globe size={12} aria-hidden="true" /> : <FileText size={12} aria-hidden="true" />}
-                                  {chunk.document_name}
-                                </span>
-                                <span className="chunk-score" aria-label={`Relevance score: ${chunk.score.toFixed(3)}`}>Score: {chunk.score.toFixed(3)}</span>
-                              </div>
-                              <p className="chunk-text">"{chunk.text}"</p>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                )}
               </div>
             </div>
           ))}

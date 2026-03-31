@@ -33,60 +33,60 @@
   --tracking-wide: 0.025em;
   --tracking-wider: 0.05em;
 
-  /* Color Palette System - Financial/Investment Theme */
+  /* Color Palette System - Modern AI Chat Theme */
   
-  /* Base Colors - Dark Mode */
-  --bg-primary: #0b0d12;
-  --bg-secondary: #101423;
-  --bg-tertiary: #1a1d2e;
+  /* Base Colors - Dark Mode with warmer tones */
+  --bg-primary: #0d0d0d;
+  --bg-secondary: #171717;
+  --bg-tertiary: #1f1f1f;
   
   /* Surface Colors */
-  --surface-base: rgba(31, 33, 39, 0.72);
-  --surface-hover: rgba(31, 33, 39, 0.85);
-  --surface-active: rgba(31, 33, 39, 0.95);
+  --surface-base: rgba(38, 38, 38, 0.5);
+  --surface-hover: rgba(45, 45, 45, 0.7);
+  --surface-active: rgba(52, 52, 52, 0.85);
   
   /* Border Colors */
-  --border-subtle: rgba(255, 255, 255, 0.05);
-  --border-default: rgba(255, 255, 255, 0.08);
-  --border-emphasis: rgba(255, 255, 255, 0.12);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-default: rgba(255, 255, 255, 0.1);
+  --border-emphasis: rgba(255, 255, 255, 0.15);
   
   /* Text Colors */
-  --text-primary: #e5e7eb;      /* Main content */
-  --text-secondary: #d1d5db;    /* Secondary content */
-  --text-muted: #9ca3af;        /* Muted/disabled */
-  --text-inverse: #1f2937;      /* On light backgrounds */
+  --text-primary: #ececec;      /* Main content */
+  --text-secondary: #d1d1d1;    /* Secondary content */
+  --text-muted: #a0a0a0;        /* Muted/disabled */
+  --text-inverse: #0d0d0d;      /* On light backgrounds */
   
-  /* Accent Colors - Financial Theme */
-  --accent-primary: #3b82f6;    /* Primary blue */
-  --accent-secondary: #6366f1;  /* Indigo */
-  --accent-tertiary: #8b5cf6;   /* Purple */
+  /* Accent Colors - Modern Teal/Cyan Theme */
+  --accent-primary: #10a37f;    /* Primary teal */
+  --accent-secondary: #1a7f64;  /* Darker teal */
+  --accent-tertiary: #0d8a6f;   /* Medium teal */
   
   /* Semantic Colors */
   --success: #10b981;           /* Green */
   --warning: #f59e0b;           /* Amber */
   --error: #ef4444;             /* Red */
-  --info: #3b82f6;              /* Blue */
+  --info: #10a37f;              /* Teal */
   
   /* Message Bubbles */
-  --msg-user-bg: rgba(59, 130, 246, 0.18);
-  --msg-ai-bg: rgba(255, 255, 255, 0.06);
+  --msg-user-bg: rgba(16, 163, 127, 0.1);
+  --msg-ai-bg: transparent;
   
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, #3b82f6, #6366f1);
-  --gradient-bg: linear-gradient(180deg, #0b0d12 0%, #101423 100%);
+  --gradient-primary: linear-gradient(135deg, #10a37f, #1a7f64);
+  --gradient-bg: linear-gradient(180deg, #0d0d0d 0%, #171717 100%);
   
   /* Glow Effects */
-  --glow-primary: rgba(59, 130, 246, 0.42);
-  --glow-secondary: rgba(99, 102, 241, 0.35);
+  --glow-primary: rgba(16, 163, 127, 0.3);
+  --glow-secondary: rgba(26, 127, 100, 0.25);
   
   /* Component-specific colors */
-  --btn-accent-bg: rgba(59, 130, 246, 0.12);
-  --btn-accent-bg-hover: rgba(59, 130, 246, 0.18);
-  --btn-accent-border: rgba(59, 130, 246, 0.28);
+  --btn-accent-bg: rgba(16, 163, 127, 0.1);
+  --btn-accent-bg-hover: rgba(16, 163, 127, 0.15);
+  --btn-accent-border: rgba(16, 163, 127, 0.3);
   --btn-danger-bg-hover: rgba(239, 68, 68, 0.1);
   --btn-danger-bg-active: rgba(239, 68, 68, 0.12);
   --badge-warning-bg: rgba(234, 179, 8, 0.1);
-  --shadow-default: rgba(0, 0, 0, 0.2);
+  --shadow-default: rgba(0, 0, 0, 0.3);
   
   /* Legacy aliases for backward compatibility */
   --bg-color: var(--bg-primary);
@@ -141,11 +141,10 @@ body {
 /* Glassmorphism Utilities */
 .glass-panel {
   background: var(--surface-base);
-  /* ChatGPT feels mostly flat; keep blur minimal */
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid var(--border-default);
-  box-shadow: none;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Custom Scrollbar */
