@@ -147,8 +147,6 @@ See [DEMO_GUIDE.md](DEMO_GUIDE.md) for detailed recording instructions.
 
 ### Backend (Render)
 
-**Deployment URL**: https://ai-research-assistant-backend-newa.onrender.com
-
 **Environment Variables Required:**
 - `GEMINI_API_KEY`: Your Gemini API key
 - `FIREBASE_SERVICE_ACCOUNT_JSON`: Service account JSON as single-line string
@@ -158,16 +156,12 @@ See [DEMO_GUIDE.md](DEMO_GUIDE.md) for detailed recording instructions.
 
 ### Frontend (Firebase Hosting)
 
-**Deployment URL**: https://rag-assignment-b7cea.web.app
-
 **Deployment Steps:**
 ```bash
 cd frontend
 npm run build
 firebase deploy --only hosting
 ```
-
-**Deployment Status**: ✅ Successfully deployed on March 31, 2026
 
 ## 🔑 Environment Variables
 
